@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+PATH=$HOME/chunk-utils/yabai/bin:$PATH
+
+yabai -m config status_bar                   on
+yabai -m config status_bar_font_family       "SF Compact Display"
+yabai -m config status_bar_icon_font_family  "FontAwesome"
+yabai -m config status_bar_background_color  0xff101010
+yabai -m config status_bar_foreground_color  0xffa8a8a8
+yabai -m config status_bar_space_icon_strip  I II III IV V VI VII VIII IX X
+yabai -m config status_bar_power_icon_strip   
+yabai -m config status_bar_space_icon        
+yabai -m config status_bar_clock_icon        
+
+yabai -m config mouse_follows_focus          on
+yabai -m config focus_follows_mouse          autofocus
+yabai -m config window_border                off
+
+yabai -m config split_ratio                  0.50
+yabai -m config auto_balance                 on
+
+yabai -m config mouse_modifier               fn
+yabai -m config mouse_action1                move
+yabai -m config mouse_action2                resize
+
+yabai -m config layout                       bsp
+yabai -m config window_gap 0
+
+echo "yabai configuration loaded.."
