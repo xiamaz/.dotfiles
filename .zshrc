@@ -113,7 +113,7 @@ esac
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-alias cgit='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias cgit='git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 
 replacelink() {
 	if [ -L "$1" ]; then
