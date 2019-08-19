@@ -8,6 +8,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-eunuch'
 Plug 'junegunn/fzf'
 Plug 'junegunn/vim-easy-align'
 Plug 'majutsushi/tagbar'   " deps: universal-ctags
