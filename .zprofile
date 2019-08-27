@@ -3,6 +3,7 @@
  export PATH=~/.local/bin:$PATH
  export PATH=~/flutter/bin:$PATH
  export PATH=~/go/bin:$PATH
+ export PATH=/usr/local/opt/ruby/bin:$PATH
  export GOPATH=~/go
 
 # Setting PATH for Python 3.6
