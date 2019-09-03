@@ -4,11 +4,69 @@ unsetopt correctall
 ## Conda configuration
 condaprofile="etc/profile.d/conda.sh"
 
+# Add a line if it doesn't already exist in a file
+# 1 - line to be inserted
+# 2 - destination file
+_append_line() {
+	grep -qxF "$1" $2 || echo "$1" >> $2
+}
+
+# Delete a line from a file
+_delete_line() {
+	sed "/^$1$/d" $2 > $2.tmp
+	mv $2.tmp $2
+}
+
+_add_autoenv() {
+	echo "Adding lines to .autoenv.zsh and .autoenv_leave.zsh"
+	if [ ! -f ./.autoenv.zsh ]; then
+		touch ./.autoenv.zsh
+	fi
+	if [ ! -f ./.autoenv_leave.zsh ]; then
+		touch ./.autoenv_leave.zsh
+	fi
+	_append_line "$1" ./.autoenv.zsh
+	_append_line "$2" ./.autoenv_leave.zsh
+}
+
+_del_autoenv() {
+	echo "Removing lines from .autoenv.zsh and .autoenv_leave.zsh"
+	_delete_line "$1" ./.autoenv.zsh
+	_delete_line "$2" ./.autoenv_leave.zsh
+
+	if [ ! -s ./.autoenv.zsh ]; then
+		rm ./.autoenv.zsh
+	fi
+	if [ ! -s ./.autoenv_leave.zsh ]; then
+		rm ./.autoenv_leave.zsh
+	fi
+}
+
+_add_env_autoenv() {
+	_add_autoenv "set $1=$2" "unset $1"
+}
+
+_del_env_autoenv() {
+	_del_autoenv "set $1=$2" "unset $1"
+}
+
+_add_conda_autoenv() {
+	_add_autoenv "pa $1" "conda deactivate"
+}
+
+_del_conda_autoenv() {
+	_del_autoenv "pa $1" "conda deactivate"
+}
+
+alias aenv-add="_add_env_autoenv"
+alias aenv-del="_del_env_autoenv"
+
 _create_conda_env() {
 	name=$1
-	conda create -y -n $name python=3.7 jedi pylint flake8
+	conda create -y -n $name python=3.7 jedi pylint flake8 ipython
 	conda activate $name
 	pip install neovim
+	_add_conda_autoenv "$name"
 }
 
 _remove_conda_env() {
@@ -17,6 +75,7 @@ _remove_conda_env() {
 		conda deactivate
 	fi
 	conda env remove -n $name
+	_del_conda_autoenv $name
 }
 
 _export_conda_env() {
