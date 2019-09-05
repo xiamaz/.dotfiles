@@ -31,11 +31,11 @@ yabai < cmd - y: yabai -m space --mirror y-axis; skhd -k "return"
 yabai < cmd - x: yabai -m space --mirror x-axis; skhd -k "return"
 yabai < cmd - r: yabai -m space --rotate 90; skhd -k "return"
 
-yabai < cmd + shift - f : yabai -m window --toggle zoom-fullscreen
-yabai < cmd - f : yabai -m window --toggle zoom-parent
+yabai < cmd + shift - f : yabai -m window --toggle zoom-fullscreen; skhd -k "return"
+yabai < cmd - f : yabai -m window --toggle zoom-parent; skhd -k "return"
 
-yabai < cmd - a : yabai -m space --layout bsp
-yabai < cmd - s : yabai -m space --layout float
+yabai < cmd - a : yabai -m space --layout bsp; skhd -k "return"
+yabai < cmd - s : yabai -m space --layout float; skhd -k "return"
 
 yabai < return; default
 yabai < escape; default
