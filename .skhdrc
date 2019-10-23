@@ -61,5 +61,5 @@ shift + cmd - 7 : yabai -m window --space 7
 shift + cmd - 8 : yabai -m window --space 8
 shift + cmd - 9 : yabai -m window --space 9
 
-cmd - w  : yabai -m display --focus recent
-shift + cmd - w  : yabai -m window --display recent; yabai -m display --focus recent
+cmd - e  : yabai -m display --focus recent
+shift + cmd - e  : yabai -m window --display recent; yabai -m display --focus recent
