@@ -7,21 +7,20 @@ endfunction
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-sleuth'  " autodetect indent
+Plug 'tpope/vim-eunuch'  " Helpers for Move, Delete etc operations
 Plug 'junegunn/fzf'
 Plug 'junegunn/vim-easy-align'
 Plug 'majutsushi/tagbar'   " deps: universal-ctags
 Plug 'kshenoy/vim-signature'  " show marks in gutter
-Plug 'krisajenkins/vim-projectlocal' " put a local vimrc in projects
 Plug 'mbbill/undotree'  " menu with undo
 Plug 'itchyny/lightline.vim' | Plug 'maximbaz/lightline-ale'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'  " add markers for indent
 Plug 'chriskempson/base16-vim'
 Plug 'Chiel92/vim-autoformat'
-Plug 'drmikehenry/vim-extline'
- Plug 'jlanzarotta/bufexplorer'
+Plug 'drmikehenry/vim-extline'  " CTRL-L to underline and overline lines
+Plug 'jlanzarotta/bufexplorer'
 " Code utils
 Plug 'w0rp/ale' " deps: pylint, flake8
 Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
@@ -33,7 +32,6 @@ Plug 'Vimjas/vim-python-pep8-indent', {'for' : 'python'}
 Plug 'ekalinin/Dockerfile.vim'
 
 Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-tern', {'for': 'javascript', 'do': 'yarn install'}
 Plug 'ncm2/ncm2-jedi', {'for': 'python'}
 Plug 'ncm2/ncm2-racer', {'for': 'rust'}
 Plug 'ncm2/ncm2-pyclang', {'for': 'c'}
@@ -50,6 +48,7 @@ if $NEOVIM_JS == '1'
     Plug 'mhartington/nvim-typescript', {'do': './install.sh', 'for': 'typescript'}
     Plug 'iloginow/vim-stylus'
     Plug 'Valloric/MatchTagAlways', {'for' : 'html'}
+    Plug 'ncm2/ncm2-tern', {'for': 'javascript', 'do': 'yarn install'}
     Plug 'ncm2/ncm2-cssomni', {'for': ['css', 'html']}
     Plug 'ncm2/ncm2-html-subscope', {'for': 'html'}
 endif
@@ -71,6 +70,7 @@ call plug#end()
 
 "" Basic Settings
 syntax on
+set noshowcmd noruler  " improve scrolling
 let mapleader = ";"
 let maplocalleader = ";"
 " undo history persistent after closed file
@@ -249,11 +249,6 @@ let cmdline_map_send_block     = '<LocalLeader>b'
 let cmdline_map_quit           = '<LocalLeader>rq'
 let cmdline_vsplit             = 1
 let cmdline_term_width         = 80
-"vim riv rst editor
-let g:riv_disable_folding      = 1
-let g:riv_section_levels       = '*=-^"'
-" instantRst
-let g:instant_rst_browser      = 'firefox'
 
 " sniplet settings
 " Press enter key to trigger snippet expansion
@@ -309,9 +304,8 @@ let g:autoformat_remove_trailing_spaces = 0
 autocmd FileType vim,tex let b:autoformat_autoindent=0
 noremap <F3> :Autoformat<CR>
 
-" Start interactive EasyAlign in visual mode (e.g. vipga)
+" Start interactive EasyAlign in visual mode or motion/text object (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
 nnoremap <F4> :call LanguageClient_contextMenu()<CR>
