@@ -1,3 +1,10 @@
+if ! empty($NEOVIM_PYTHON_PATH)
+    let g:python3_host_prog = $NEOVIM_PYTHON_PATH
+end
+let g:loaded_python_provider = 0
+let g:loaded_ruby_provider = 0
+let g:loaded_node_provider = 0
+
 call plug#begin()
 "" Neovim configuration
 function! DoRemote(arg)
