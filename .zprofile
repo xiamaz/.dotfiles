@@ -18,4 +18,5 @@ export R_LIBS_USER="$HOME/R/lib"
 export NEOVIM_JS=1
 export NEOVIM_SCI=1
 export NEOVIM_GO=1
-export NEOVIM_PYTHON_PATH="/usr/local/bin/python3"
+export NEOVIM_PYTHON3_PATH="/usr/local/bin/python3"
+export NEOVIM_PYTHON_PATH="/usr/local/bin/python2"

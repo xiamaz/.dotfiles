@@ -1,7 +1,7 @@
 if ! empty($NEOVIM_PYTHON_PATH)
-    let g:python3_host_prog = $NEOVIM_PYTHON_PATH
+    let g:python3_host_prog = $NEOVIM_PYTHON3_PATH
+    let g:python_host_prog = $NEOVIM_PYTHON_PATH
 end
-let g:loaded_python_provider = 0
 let g:loaded_ruby_provider = 0
 let g:loaded_node_provider = 0
 
@@ -277,8 +277,9 @@ let g:ale_linters               = {'python': ['flake8', 'pylint']}
 let g:ale_python_flake8_options = '--ignore=F821'
 
 " latex settings
-let g:vimtex_compiler_progname = 'nvr'
+let g:vimtex_view_method       = "skim"
 let g:tex_flavor               = "latex"
+let g:vimtex_compiler_progname = 'nvr'
 let g:tex_conceal              = ""
 
 " Clipboard settings
