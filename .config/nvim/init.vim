@@ -32,11 +32,12 @@ Plug 'jlanzarotta/bufexplorer'
 Plug 'w0rp/ale' " deps: pylint, flake8
 Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-Plug 'jalvesaq/vimcmdline', {'for': ['python', 'julia']}
+Plug 'jalvesaq/vimcmdline', {'for': ['python', 'julia', 'sql', 'sh']}
 Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'Vimjas/vim-python-pep8-indent', {'for' : 'python'}
 Plug 'ekalinin/Dockerfile.vim'
+Plug 'lifepillar/pgsql.vim'
 
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-jedi', {'for': 'python'}
@@ -246,7 +247,7 @@ let g:LanguageClient_serverCommands = {
 let g:ncm2_pyclang#library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
 
 " vimcmdline settings
-let cmdline_app                = {'python': 'ipython3', 'julia': 'julia'}
+let cmdline_app                = {'python': 'ipython3', 'julia': 'julia', 'sql': 'psql', 'sh': 'bash'}
 let cmdline_map_start          = '<LocalLeader>rf'
 let cmdline_map_send           = '<LocalLeader>l'
 let cmdline_map_send_and_stay  = '<LocalLeader><Space>'
@@ -274,7 +275,6 @@ let g:ale_r_lintr_options       = 'with_defaults(object_name_linter = NULL, line
 let g:ale_lint_on_text_changed  = 'never'
 let g:ale_echo_msg_format       = '[%linter%] %code%:%s [%severity%]'
 let g:ale_linters               = {'python': ['flake8', 'pylint']}
-let g:ale_python_flake8_options = '--ignore=F821'
 
 " latex settings
 let g:vimtex_view_method       = "skim"
