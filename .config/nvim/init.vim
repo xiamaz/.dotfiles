@@ -16,6 +16,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sleuth'  " autodetect indent
 Plug 'tpope/vim-eunuch'  " Helpers for Move, Delete etc operations
+Plug 'tpope/vim-dadbod', {'for': 'sql'}
 Plug 'junegunn/fzf'
 Plug 'junegunn/vim-easy-align'
 Plug 'majutsushi/tagbar'   " deps: universal-ctags
@@ -311,6 +312,10 @@ let g:autoformat_retab = 0
 let g:autoformat_remove_trailing_spaces = 0
 autocmd FileType vim,tex let b:autoformat_autoindent=0
 noremap <F3> :Autoformat<CR>
+
+" SQL execute
+autocmd FileType sql vnoremap <LocalLeader>l :DB<CR>
+autocmd FileType sql nnoremap <LocalLeader>l V:DB<CR>
 
 " Start interactive EasyAlign in visual mode or motion/text object (e.g. vipga)
 xmap ga <Plug>(EasyAlign)

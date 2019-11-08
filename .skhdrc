@@ -14,8 +14,8 @@ cmd + shift - l : yabai -m window --insert east
 :: yabai
 cmd - a; yabai
 
-yabai < cmd - c: yabai -m space --create; skhd -k "return"
-yabai < cmd - q: yabai -m space --destroy; skhd -k "return"
+yabai < cmd - c: yabai -m space --create; yabai -m space --focus $(yabai -m query --spaces | jq '.[-1].index'); skhd -k "return"
+yabai < cmd - q: yabai -m space --destroy; yabai -m space --focus $(yabai -m query --spaces | jq '.[-1].index'); skhd -k "return"
 
 yabai < cmd - n: yabai -m space --focus next; skhd -k "return"
 yabai < cmd - p: yabai -m space --focus prev; skhd -k "return"
