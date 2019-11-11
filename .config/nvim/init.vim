@@ -275,7 +275,7 @@ let g:UltiSnipsEditSplit                = "vertical"
 let g:ale_r_lintr_options       = 'with_defaults(object_name_linter = NULL, line_length_linter(120), closed_curly_linter = NULL, open_curly_linter = NULL, snake_case_linter = NULL, camel_case_linter = NULL, multiple_dots_linter = NULL)'
 let g:ale_lint_on_text_changed  = 'never'
 let g:ale_echo_msg_format       = '[%linter%] %code%:%s [%severity%]'
-let g:ale_linters               = {'python': ['flake8', 'pylint']}
+let g:ale_linters               = {'python': ['flake8', 'pylint'], 'go': ['golint', 'gofmt', 'gobuild']}
 
 " latex settings
 let g:vimtex_view_method       = "skim"
