@@ -22,7 +22,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'majutsushi/tagbar'   " deps: universal-ctags
 Plug 'kshenoy/vim-signature'  " show marks in gutter
 Plug 'mbbill/undotree'  " menu with undo
-Plug 'itchyny/lightline.vim' | Plug 'maximbaz/lightline-ale'
+Plug 'itchyny/lightline.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Yggdroot/indentLine'  " add markers for indent
 Plug 'chriskempson/base16-vim'
@@ -30,8 +30,7 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'drmikehenry/vim-extline'  " CTRL-L to underline and overline lines
 Plug 'jlanzarotta/bufexplorer'
 " Code utils
-Plug 'w0rp/ale' " deps: pylint, flake8
-Plug 'ncm2/ncm2' | Plug 'roxma/nvim-yarp'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'jalvesaq/vimcmdline', {'for': ['python', 'julia', 'sql', 'sh']}
 Plug 'ludovicchabant/vim-gutentags'
@@ -39,15 +38,6 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'Vimjas/vim-python-pep8-indent', {'for' : 'python'}
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'lifepillar/pgsql.vim'
-
-Plug 'ncm2/ncm2-path'
-Plug 'ncm2/ncm2-jedi', {'for': 'python'}
-Plug 'ncm2/ncm2-racer', {'for': 'rust'}
-Plug 'ncm2/ncm2-pyclang', {'for': 'c'}
-Plug 'ncm2/ncm2-vim', {'for': 'vim'} | Plug 'Shougo/neco-vim', {'for': 'vim'}
-Plug 'ncm2/ncm2-markdown-subscope', {'for': 'markdown'}
-Plug 'ncm2/ncm2-rst-subscope', {'for': 'rst'}
-Plug 'ncm2/ncm2-ultisnips'
 
 if $NEOVIM_JS == '1'
     Plug 'othree/yajs.vim', {'for': 'javascript'}
@@ -57,23 +47,14 @@ if $NEOVIM_JS == '1'
     Plug 'mhartington/nvim-typescript', {'do': './install.sh', 'for': 'typescript'}
     Plug 'iloginow/vim-stylus'
     Plug 'Valloric/MatchTagAlways', {'for' : 'html'}
-    Plug 'ncm2/ncm2-tern', {'for': 'javascript', 'do': 'yarn install'}
-    Plug 'ncm2/ncm2-cssomni', {'for': ['css', 'html']}
-    Plug 'ncm2/ncm2-html-subscope', {'for': 'html'}
 endif
 if $NEOVIM_GO == '1'
     Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries', 'for': 'go'}
-    Plug 'ncm2/ncm2-go', {'for': 'go'}
 endif
 if $NEOVIM_SCI == '1'
     Plug 'lervag/vimtex', {'for': 'tex'}
     Plug 'jalvesaq/Nvim-R', {'for' : 'r'}
-    Plug 'gaalcaras/ncm-R', {'for': 'r'}
     Plug 'JuliaEditorSupport/julia-vim'
-    Plug 'autozimu/LanguageClient-neovim', {
-    			\ 'branch': 'next',
-    			\ 'do': 'bash install.sh',
-    			\ }
 endif
 call plug#end()
 
@@ -98,7 +79,6 @@ set splitbelow splitright  " split settings
 set textwidth=80  " set textwidth to 80 chars
 let &colorcolumn="80,".join(range(120,999),",")  " color background past 80 chars
 au TermOpen * setlocal nonu  " disable linenumbers in terminal
-set hidden  " Hide files instead of close
 
 "" Theme Settings
 if $TERM=~'linux'
@@ -111,6 +91,17 @@ else
 end
 
 "" Plugin Configuration
+let g:coc_global_extensions = [
+	    \ 'coc-python',
+	    \ 'coc-tsserver', 'coc-html', 'coc-css',
+	    \ 'coc-vimlsp', 'coc-vimtex',
+	    \ 'coc-go',
+	    \ 'coc-texlab',
+	    \ 'coc-r-lsp',
+	    \ 'coc-docker', 'coc-sh',
+	    \ 'coc-ccls',
+	    \ 'coc-ultisnips',
+	    \]
 let g:undotree_WindowLayout = 3
 " Lightline
 let g:lightline = {
@@ -118,24 +109,13 @@ let g:lightline = {
 			\  'component': {
 			\    'charvaluehex': '0x%B',
 			\  },
-			\  'component_expand': {
-			\    'linter_checking': 'lightline#ale#checking',
-			\    'linter_warnings': 'lightline#ale#warnings',
-			\    'linter_errors': 'lightline#ale#errors',
-			\    'linter_ok': 'lightline#ale#ok',
-			\  },
-			\  'component_type': {
-			\     'linter_checking': 'left',
-			\     'linter_warnings': 'warning',
-			\     'linter_errors': 'error',
-			\     'linter_ok': 'left',
-			\  },
+			\ 'component_function': { 'cocstatus': 'coc#status' },
 			\  'active': {
 			\     'right': [
 			\        [ 'lineinfo' ],
 			\        [ 'percent' ],
 			\        [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ],
-			\        ['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
+			\        [ 'cocstatus' ],
 			\     ]
 			\  },
 			\}
@@ -156,15 +136,7 @@ let R_bracketed_paste = 1
 " Tagbar settings
 let g:tagbar_left = 0
 let g:tagbar_sort = 0
-" ncm2 completion manager settings
-" enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
-" IMPORTANTE: :help Ncm2PopupOpen for more information
-set completeopt=noinsert,menuone,noselect
-set shortmess+=c  " hide some messages
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>\<cr>" : "\<CR>")
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 " gutentags config
 let g:gutentags_exclude_filetypes = ['.txt', '.md', '.rst', '.json', '.xml', '.sh', '.bash']
 let g:gutentags_cache_dir = '~/.cache/tags'
@@ -174,78 +146,6 @@ let g:gutentags_file_list_command = {
 			\ '.hg': 'hg files',
 			\ },
 			\ }
-
-" latex completion using vimtex
-au InsertEnter * call ncm2#enable_for_buffer()
-au Filetype tex call ncm2#register_source({
-			\ 'name' : 'vimtex-cmds',
-			\ 'priority': 8,
-			\ 'complete_length': -1,
-			\ 'scope': ['tex'],
-			\ 'matcher': {'name': 'prefix', 'key': 'word'},
-			\ 'word_pattern': '\w+',
-			\ 'complete_pattern': g:vimtex#re#ncm2#cmds,
-			\ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-			\ })
-au Filetype tex call ncm2#register_source({
-			\ 'name' : 'vimtex-labels',
-			\ 'priority': 8,
-			\ 'complete_length': -1,
-			\ 'scope': ['tex'],
-			\ 'matcher': {'name': 'combine',
-			\             'matchers': [
-			\               {'name': 'substr', 'key': 'word'},
-			\               {'name': 'substr', 'key': 'menu'},
-			\             ]},
-			\ 'word_pattern': '\w+',
-			\ 'complete_pattern': g:vimtex#re#ncm2#labels,
-			\ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-			\ })
-au Filetype tex call ncm2#register_source({
-			\ 'name' : 'vimtex-files',
-			\ 'priority': 8,
-			\ 'complete_length': -1,
-			\ 'scope': ['tex'],
-			\ 'matcher': {'name': 'combine',
-			\             'matchers': [
-			\               {'name': 'abbrfuzzy', 'key': 'word'},
-			\               {'name': 'abbrfuzzy', 'key': 'abbr'},
-			\             ]},
-			\ 'word_pattern': '\w+',
-			\ 'complete_pattern': g:vimtex#re#ncm2#files,
-			\ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-			\ })
-au Filetype tex call ncm2#register_source({
-			\ 'name' : 'bibtex',
-			\ 'priority': 8,
-			\ 'complete_length': -1,
-			\ 'scope': ['tex'],
-			\ 'matcher': {'name': 'combine',
-			\             'matchers': [
-			\               {'name': 'prefix', 'key': 'word'},
-			\               {'name': 'abbrfuzzy', 'key': 'abbr'},
-			\               {'name': 'abbrfuzzy', 'key': 'menu'},
-			\             ]},
-			\ 'word_pattern': '\w+',
-			\ 'complete_pattern': g:vimtex#re#ncm2#bibtex,
-			\ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-			\ })
-
-" language server settings
-let g:LanguageClient_serverCommands = {
-			\ 'julia': ['julia', '--startup-file=no', '--history-file=no', '-e', '
-			\     using LanguageServer;
-			\     using Pkg;
-			\     import StaticLint;
-			\     import SymbolServer;
-			\     env_path = dirname(Pkg.Types.Context().env.project_file);
-			\     server = LanguageServer.LanguageServerInstance(stdin, stdout, false, env_path, "", Dict());
-			\     server.runlinter = true;
-			\     run(server);
-			\ '],
-			\ 'r': ['R', '--slave', '-e', 'languageserver::run()'],
-			\ }
-let g:ncm2_pyclang#library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
 
 " vimcmdline settings
 let cmdline_app                = {'python': 'ipython3', 'julia': 'julia', 'sql': 'psql', 'sh': 'bash'}
@@ -259,23 +159,12 @@ let cmdline_map_quit           = '<LocalLeader>rq'
 let cmdline_vsplit             = 1
 let cmdline_term_width         = 80
 
-" sniplet settings
-" Press enter key to trigger snippet expansion
-" The parameters are the same as `:help feedkeys()`
-inoremap <silent> <expr> <CR> ncm2_ultisnips#expand_or("\<CR>", 'n')
-
 " c-j c-k for moving in snippet
 let g:UltiSnipsExpandTrigger            = "<Plug>(ultisnips_expand)"
 let g:UltiSnipsJumpForwardTrigger       = "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger      = "<c-k>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsEditSplit                = "vertical"
-
-" Ale linting settings
-let g:ale_r_lintr_options       = 'with_defaults(object_name_linter = NULL, line_length_linter(120), closed_curly_linter = NULL, open_curly_linter = NULL, snake_case_linter = NULL, camel_case_linter = NULL, multiple_dots_linter = NULL)'
-let g:ale_lint_on_text_changed  = 'never'
-let g:ale_echo_msg_format       = '[%linter%] %code%:%s [%severity%]'
-let g:ale_linters               = {'python': ['flake8', 'pylint'], 'go': ['golint', 'gofmt', 'gobuild']}
 
 " latex settings
 let g:vimtex_view_method       = "skim"
@@ -325,3 +214,98 @@ nnoremap <F4> :call LanguageClient_contextMenu()<CR>
 nnoremap <F5> :UndotreeToggle<cr>
 nnoremap <F6> :ToggleWhitespace<CR>
 nnoremap <F7> :TagbarToggle<CR>
+
+"" COC settings
+set nobackup nowritebackup hidden
+set cmdheight=2
+set updatetime=300 shortmess+=c signcolumn=yes
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
+inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+nmap <leader>rn <Plug>(coc-rename)
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+" nmap <silent> <C-d> <Plug>(coc-range-select)
+" xmap <silent> <C-d> <Plug>(coc-range-select)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
