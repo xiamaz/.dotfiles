@@ -217,7 +217,7 @@ nnoremap <F7> :TagbarToggle<CR>
 
 "" COC settings
 set nobackup nowritebackup hidden
-set cmdheight=2
+set cmdheight=1
 set updatetime=300 shortmess+=c signcolumn=yes
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
