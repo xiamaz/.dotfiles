@@ -18,6 +18,7 @@ Plug 'tpope/vim-sleuth'  " autodetect indent
 Plug 'tpope/vim-eunuch'  " Helpers for Move, Delete etc operations
 Plug 'tpope/vim-dadbod', {'for': 'sql'}
 Plug 'junegunn/fzf'
+Plug 'liuchengxu/vim-clap'
 Plug 'junegunn/vim-easy-align'
 Plug 'majutsushi/tagbar'   " deps: universal-ctags
 Plug 'kshenoy/vim-signature'  " show marks in gutter
@@ -28,7 +29,6 @@ Plug 'Yggdroot/indentLine'  " add markers for indent
 Plug 'chriskempson/base16-vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'drmikehenry/vim-extline'  " CTRL-L to underline and overline lines
-Plug 'jlanzarotta/bufexplorer'
 " Code utils
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -151,7 +151,6 @@ let g:gutentags_file_list_command = {
 let cmdline_app                = {'python': 'ipython3', 'julia': 'julia', 'sql': 'psql', 'sh': 'bash'}
 let cmdline_map_start          = '<LocalLeader>rf'
 let cmdline_map_send           = '<LocalLeader>l'
-let cmdline_map_send_and_stay  = '<LocalLeader><Space>'
 let cmdline_map_source_fun     = '<LocalLeader>f'
 let cmdline_map_send_paragraph = '<LocalLeader>p'
 let cmdline_map_send_block     = '<LocalLeader>b'
@@ -178,22 +177,6 @@ set clipboard=unnamedplus
 " keybindings for window switching
 tnoremap <Esc> <C-\><C-n>
 inoremap <c-c> <ESC>
-
-"" Custom keybindings
-" setup arrowkeys for visual scroll
-noremap  <buffer> <silent> <Up>   gk
-noremap  <buffer> <silent> <Down> gj
-noremap  <buffer> <silent> <Home> g<Home>
-noremap  <buffer> <silent> <End>  g<End>
-inoremap <buffer> <silent> <Up>   <C-o>gk
-inoremap <buffer> <silent> <Down> <C-o>gj
-inoremap <buffer> <silent> <Home> <C-o>g<Home>
-inoremap <buffer> <silent> <End>  <C-o>g<End>
-" remove highlight with escape in normal mode
-nnoremap <esc> :noh<return><esc>
-nnoremap <esc>^[ <esc>^[
-
-nnoremap <Leader>i  mzgg=G`z :retab<CR>
 
 " Autoformat on buffer save
 let g:autoformat_autoindent = 0
@@ -309,3 +292,21 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+"" Custom keybindings
+" setup arrowkeys for visual scroll
+noremap  <buffer> <silent> <Up>   gk
+noremap  <buffer> <silent> <Down> gj
+noremap  <buffer> <silent> <Home> g<Home>
+noremap  <buffer> <silent> <End>  g<End>
+inoremap <buffer> <silent> <Up>   <C-o>gk
+inoremap <buffer> <silent> <Down> <C-o>gj
+inoremap <buffer> <silent> <Home> <C-o>g<Home>
+inoremap <buffer> <silent> <End>  <C-o>g<End>
+" remove highlight with escape in normal mode
+nnoremap <esc> :noh<return><esc>
+nnoremap <esc>^[ <esc>^[
+
+nnoremap <Leader>i  mzgg=G`z :retab<CR>
+nnoremap <leader>b :Clap buffers<CR>
+nnoremap <leader><space> :Clap files<CR>
