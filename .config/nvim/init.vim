@@ -27,7 +27,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Yggdroot/indentLine'  " add markers for indent
 Plug 'chriskempson/base16-vim'
-Plug 'Chiel92/vim-autoformat'
 Plug 'drmikehenry/vim-extline'  " CTRL-L to underline and overline lines
 " Code utils
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -148,7 +147,7 @@ let g:gutentags_file_list_command = {
 			\ }
 
 " vimcmdline settings
-let cmdline_app                = {'python': 'ipython3', 'julia': 'julia', 'sql': 'psql', 'sh': 'bash'}
+let cmdline_app                = {'python': 'ipython3', 'julia': 'julia', 'sh': 'bash'}
 let cmdline_map_start          = '<LocalLeader>rf'
 let cmdline_map_send           = '<LocalLeader>l'
 let cmdline_map_source_fun     = '<LocalLeader>f'
@@ -159,16 +158,13 @@ let cmdline_vsplit             = 1
 let cmdline_term_width         = 80
 
 " c-j c-k for moving in snippet
-let g:UltiSnipsExpandTrigger            = "<Plug>(ultisnips_expand)"
-let g:UltiSnipsJumpForwardTrigger       = "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger      = "<c-k>"
 let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsEditSplit                = "vertical"
 
 " latex settings
 let g:vimtex_view_method       = "skim"
 let g:tex_flavor               = "latex"
-let g:vimtex_compiler_progname = 'nvr'
+let g:vimtex_compiler_progname = "nvr"
 let g:tex_conceal              = ""
 
 " Clipboard settings
@@ -178,25 +174,13 @@ set clipboard=unnamedplus
 tnoremap <Esc> <C-\><C-n>
 inoremap <c-c> <ESC>
 
-" Autoformat on buffer save
-let g:autoformat_autoindent = 0
-let g:autoformat_retab = 0
-let g:autoformat_remove_trailing_spaces = 0
-autocmd FileType vim,tex let b:autoformat_autoindent=0
-noremap <F3> :Autoformat<CR>
-
-" SQL execute
-autocmd FileType sql vnoremap <LocalLeader>l :DB<CR>
-autocmd FileType sql nnoremap <LocalLeader>l V:DB<CR>
-
 " Start interactive EasyAlign in visual mode or motion/text object (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-nnoremap <F4> :call LanguageClient_contextMenu()<CR>
-nnoremap <F5> :UndotreeToggle<cr>
-nnoremap <F6> :ToggleWhitespace<CR>
-nnoremap <F7> :TagbarToggle<CR>
+nnoremap <leader><C-r> :UndotreeToggle<CR>
+nnoremap <leader><C-w> :ToggleWhitespace<CR>
+nnoremap <leader><C-t> :TagbarToggle<CR>
 
 "" COC settings
 set nobackup nowritebackup hidden
