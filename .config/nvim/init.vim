@@ -110,14 +110,13 @@ function WordCount()
 endfunction
 
 function WordCountStatus()
-  if b:wordcount_enabled == 1
+  if get(b:, "wordcount_enabled", 0) == 1
     return WordCount() . " words"
   else
     return ""
   endif
 endfunction
 
-let b:wordcount_enabled = 0
 autocmd FileType text,markdown let b:wordcount_enabled = 1
 
 " Lightline
