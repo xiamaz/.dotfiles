@@ -61,11 +61,6 @@ call plug#end()
 syntax on
 set noshowcmd noruler  " improve scrolling
 let mapleader = ";"
-let maplocalleader = ";"
-" undo history persistent after closed file
-set undofile
-" indentation settings
-filetype plugin indent on
 set autoindent
 " smart tabs configuration - use tabs for indent and spaces for align
 set noexpandtab copyindent preserveindent softtabstop=0 shiftwidth=4 tabstop=4
@@ -102,19 +97,45 @@ let g:coc_global_extensions = [
 	    \ 'coc-ultisnips',
 	    \]
 let g:undotree_WindowLayout = 3
+
+function WordCount()
+  let cur_mode = mode()
+  if cur_mode ==? "v"
+     return wordcount().visual_words
+   elseif cur_mode ==? "i"
+    return b:cur_wordcount
+  endif
+  let b:cur_wordcount = wordcount().words
+  return b:cur_wordcount
+endfunction
+
+function WordCountStatus()
+  if b:wordcount_enabled == 1
+    return WordCount() . " words"
+  else
+    return ""
+  endif
+endfunction
+
+let b:wordcount_enabled = 0
+autocmd FileType text,markdown let b:wordcount_enabled = 1
+
 " Lightline
 let g:lightline = {
 			\  'colorscheme': 'Tomorrow_Night',
 			\  'component': {
 			\    'charvaluehex': '0x%B',
 			\  },
-			\ 'component_function': { 'cocstatus': 'coc#status' },
+			\ 'component_function': {
+			\    'cocstatus': 'coc#status',
+			\    'wordcountfun': 'WordCountStatus',
+			\  },
 			\  'active': {
 			\     'right': [
 			\        [ 'lineinfo' ],
-			\        [ 'percent' ],
-			\        [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ],
-			\        [ 'cocstatus' ],
+			\        [ 'percent'  ],
+			\        [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex'],
+			\        [ 'cocstatus', 'wordcountfun' ],
 			\     ]
 			\  },
 			\}
@@ -294,3 +315,4 @@ nnoremap <esc>^[ <esc>^[
 nnoremap <Leader>i  mzgg=G`z :retab<CR>
 nnoremap <leader>b :Clap buffers<CR>
 nnoremap <leader><space> :Clap files<CR>
+nnoremap <leader><c-p> :CocCommand python.setInterpreter<CR>
