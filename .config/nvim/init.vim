@@ -177,9 +177,15 @@ let cmdline_map_quit           = '<LocalLeader>rq'
 let cmdline_vsplit             = 1
 let cmdline_term_width         = 80
 
+"" Snippet configuration
 " c-j c-k for moving in snippet
+let g:UltiSnipsExpandTrigger            = '<Nop>'
+let g:UltiSnipsJumpForwardTrigger = '<TAB>'
+let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
 let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsEditSplit                = "vertical"
+let g:coc_snippet_next                  = '<Tab>'
+let g:coc_snippet_prev                  = '<S-Tab>'
 
 " latex settings
 let g:vimtex_view_method       = "skim"
