@@ -613,17 +613,17 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>630 176 606 469 0 0 2560 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>521 650 796 486 0 0 1920 1200 </string>
+	<string>299 418 1018 447 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>12 3 1425 859 0 0 1440 900 </string>
+	<string>0 0 1280 774 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>3 2147384548 21 100000 0 0 1440 900 </string>
+	<string>0 0 1280 774 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>12 12 1416 850 0 0 1440 900 </string>
+	<string>640 0 640 387 0 0 1280 800 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>12 12 1416 850 0 0 1440 900 </string>
+	<string>960 0 960 587 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>720 445 717 429 0 0 1440 900 </string>
+	<string>10 10 1419 853 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
 	<string>480 445 479 429 0 0 1440 900 </string>
 	<key>NeverWarnAboutShortLivedSessions_CBD87FEA-E533-4470-8C3E-F2CB955A85BB</key>
@@ -2727,6 +2727,8 @@
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
 	<true/>
+	<key>PMPrintingExpandedStateForPrint2</key>
+	<false/>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -2762,6 +2764,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>/Users/max/.config/iterm2</string>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>SUEnableAutomaticChecks</key>

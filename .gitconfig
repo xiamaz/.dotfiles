@@ -1,4 +1,6 @@
 # This is Git's per-user configuration file.
+[core]
+	ignorecase = false
 [user]
 # Please adapt and uncomment the following lines:
 	name = Max Zhao

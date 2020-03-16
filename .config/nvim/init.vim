@@ -3,7 +3,7 @@ if ! empty($NEOVIM_PYTHON_PATH)
     let g:python_host_prog = $NEOVIM_PYTHON_PATH
 end
 let g:loaded_ruby_provider = 0
-let g:loaded_node_provider = 0
+" let g:loaded_node_provider = 1
 
 call plug#begin()
 "" Neovim configuration
@@ -17,7 +17,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sleuth'  " autodetect indent
 Plug 'tpope/vim-eunuch'  " Helpers for Move, Delete etc operations
 Plug 'tpope/vim-dadbod', {'for': 'sql'}
-Plug 'junegunn/fzf'
+" Plug 'junegunn/fzf'
+Plug 'junegunn/vim-peekaboo'
 Plug 'liuchengxu/vim-clap'
 Plug 'junegunn/vim-easy-align'
 Plug 'majutsushi/tagbar'   " deps: universal-ctags
@@ -28,6 +29,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'Yggdroot/indentLine'  " add markers for indent
 Plug 'chriskempson/base16-vim'
 Plug 'drmikehenry/vim-extline'  " CTRL-L to underline and overline lines
+Plug 'neovimhaskell/haskell-vim'
 " Code utils
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
@@ -35,8 +37,11 @@ Plug 'jalvesaq/vimcmdline', {'for': ['python', 'julia', 'sql', 'sh']}
 Plug 'ludovicchabant/vim-gutentags'
 
 Plug 'Vimjas/vim-python-pep8-indent', {'for' : 'python'}
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'lifepillar/pgsql.vim'
+
+Plug 'kamykn/spelunker.vim'
 
 if $NEOVIM_JS == '1'
     Plug 'othree/yajs.vim', {'for': 'javascript'}
@@ -97,6 +102,8 @@ let g:coc_global_extensions = [
 	    \ 'coc-ultisnips',
 	    \]
 let g:undotree_WindowLayout = 3
+
+let g:haskell_indent_disable = 0
 
 function WordCount()
   let cur_mode = mode()
@@ -192,6 +199,20 @@ let g:vimtex_view_method       = "skim"
 let g:tex_flavor               = "latex"
 let g:vimtex_compiler_progname = "nvr"
 let g:tex_conceal              = ""
+
+" spelunker settings
+set spelllang=en_us,de_de
+set nospell  " since we already have spelunker
+
+let g:spelunker_disable_auto_group = 1
+augroup spelunker
+  autocmd!
+  " Setting for g:spelunker_check_type = 1:
+  autocmd BufWinEnter,BufWritePost *.md,*.tex,*.latex,*.txt call spelunker#check()
+
+  " Setting for g:spelunker_check_type = 2:
+  autocmd CursorHold *.md,*.tex,*.latex,*.txt call spelunker#check_displayed_words()
+augroup END
 
 " Clipboard settings
 set clipboard=unnamedplus

@@ -210,7 +210,7 @@
                                 "key_code": "f20"
                             },
                             "to": {
-                                "key_code": "left_shift"
+                                "key_code": "page_down"
                             }
                         }
                     ]
