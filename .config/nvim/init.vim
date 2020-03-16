@@ -98,7 +98,6 @@ let g:coc_global_extensions = [
 	    \ 'coc-texlab',
 	    \ 'coc-r-lsp',
 	    \ 'coc-docker', 'coc-sh',
-	    \ 'coc-ccls',
 	    \ 'coc-ultisnips',
 	    \]
 let g:undotree_WindowLayout = 3
