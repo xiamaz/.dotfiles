@@ -14,7 +14,7 @@ endfunction
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-sleuth'  " autodetect indent
+" Plug 'tpope/vim-sleuth'  " autodetect indent
 Plug 'tpope/vim-eunuch'  " Helpers for Move, Delete etc operations
 Plug 'tpope/vim-dadbod', {'for': 'sql'}
 " Plug 'junegunn/fzf'
@@ -40,6 +40,7 @@ Plug 'Vimjas/vim-python-pep8-indent', {'for' : 'python'}
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'ekalinin/Dockerfile.vim'
 Plug 'lifepillar/pgsql.vim'
+Plug 'keith/swift.vim'
 
 Plug 'kamykn/spelunker.vim'
 
