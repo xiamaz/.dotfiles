@@ -341,4 +341,5 @@ nnoremap <esc>^[ <esc>^[
 nnoremap <Leader>i  mzgg=G`z :retab<CR>
 nnoremap <leader>b :Clap buffers<CR>
 nnoremap <leader><space> :Clap files<CR>
+nnoremap <leader>g :Clap grep<CR>
 nnoremap <leader><c-p> :CocCommand python.setInterpreter<CR>
