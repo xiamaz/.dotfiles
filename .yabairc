@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+YABAI_CERT=yabai-cert sh -c "$(curl -sSL "https://git.io/update-yabai")" &
 PATH=$HOME/chunk-utils/yabai/bin:$PATH
 
 yabai -m config status_bar                   on
