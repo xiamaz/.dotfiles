@@ -19,7 +19,7 @@ Plug 'tpope/vim-eunuch'  " Helpers for Move, Delete etc operations
 Plug 'tpope/vim-dadbod', {'for': 'sql'}
 " Plug 'junegunn/fzf'
 Plug 'junegunn/vim-peekaboo'
-Plug 'liuchengxu/vim-clap'
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 Plug 'junegunn/vim-easy-align'
 Plug 'majutsushi/tagbar'   " deps: universal-ctags
 Plug 'kshenoy/vim-signature'  " show marks in gutter
