@@ -67,6 +67,7 @@ call plug#end()
 syntax on
 set noshowcmd noruler  " improve scrolling
 let mapleader = ";"
+let maplocalleader = ";"
 set autoindent
 " smart tabs configuration - use tabs for indent and spaces for align
 set noexpandtab copyindent preserveindent softtabstop=0 shiftwidth=4 tabstop=4
