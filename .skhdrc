@@ -64,5 +64,5 @@ shift + cmd - 7 : /Users/max/Configurations/OSX/yabai-switch-window.sh 6
 shift + cmd - 8 : /Users/max/Configurations/OSX/yabai-switch-window.sh 7
 shift + cmd - 9 : /Users/max/Configurations/OSX/yabai-switch-window.sh 8
 
-cmd - e  : yabai -m display --focus recent
-shift + cmd - e  : yabai -m window --display recent; yabai -m display --focus recent
+cmd - e  : /Users/max/Configurations/OSX/yabai-switch-display.sh focus-next
+shift + cmd - e  : /Users/max/Configurations/OSX/yabai-switch-display.sh send-next

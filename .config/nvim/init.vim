@@ -36,6 +36,8 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'jalvesaq/vimcmdline', {'for': ['python', 'julia', 'sql', 'sh']}
 Plug 'ludovicchabant/vim-gutentags'
 
+Plug 'itchyny/vim-cursorword'
+
 Plug 'Vimjas/vim-python-pep8-indent', {'for' : 'python'}
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'ekalinin/Dockerfile.vim'
