@@ -58,8 +58,50 @@ _del_conda_autoenv() {
 	_del_autoenv "pa $1" "conda deactivate"
 }
 
-alias aenv-add="_add_env_autoenv"
-alias aenv-del="_del_env_autoenv"
+_has_autoenv() {
+	[[ ( -e .autoenv.zsh ) || ( -f .autoenv_leave.zsh ) ]]
+}
+autoenv() {
+	case "$1" in
+		show)
+			if _has_autoenv; then
+				echo "# .autoenv.zsh"
+				cat .autoenv.zsh
+				echo "# .autoenv_leave.zsh"
+				cat .autoenv_leave.zsh
+			else
+				echo "No autoenv in current folder."
+			fi
+			;;
+		create)
+			if ! _has_autoenv; then
+				echo "# commands executed on entering directory" > .autoenv.zsh
+				echo "# commands executed on leaving directory" > .autoenv_leave.zsh
+				autoenv edit
+			else
+				echo "Autoenv already exists in current directory."
+			fi
+			;;
+		edit)
+			if _has_autoenv; then
+				vim .autoenv.zsh .autoenv_leave.zsh -O
+			else
+				echo "No autoenv in current directory."
+			fi
+			;;
+		remove)
+			rm .autoenv.zsh .autoenv_leave.zsh
+			;;
+		*)
+			echo "ZSH autoenv management
+Usage:
+	show - Print autoenv in current dir.
+	create - Create new autoenv in current dir if it doesn't already exist.
+	edit - Edit autoenv in current directory.
+	remove - Remove autoenv in current directory."
+			;;
+	esac
+}
 
 _create_conda_env() {
 	name=$1
@@ -173,3 +215,4 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 alias cgit='git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
+alias ae='autoenv'
