@@ -347,3 +347,14 @@ nnoremap <leader>b :Clap buffers<CR>
 nnoremap <leader><space> :Clap files<CR>
 nnoremap <leader>g :Clap grep<CR>
 nnoremap <leader><c-p> :CocCommand python.setInterpreter<CR>
+
+if $CONDA_PREFIX == ""
+  if $CONDA_PYTHON_EXE == ""
+    let s:current_python_path=g:python3_host_prog
+  else
+    let s:current_python_path=$CONDA_PYTHON_EXE
+  endif
+else
+  let s:current_python_path=$CONDA_PREFIX.'/bin/python'
+endif
+call coc#config('python', {'pythonPath': s:current_python_path})
