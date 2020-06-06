@@ -173,13 +173,3 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 alias cgit='git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
-
-replacelink() {
-	if [ -L "$1" ]; then
-		origin=$(readlink "$1")
-		unlink $1
-		cp "$origin" "$1"
-	else
-		echo "$1 not a symlink"
-	fi
-}
