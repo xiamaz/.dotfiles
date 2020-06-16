@@ -14,6 +14,8 @@ endfunction
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'zef/vim-cycle'
+Plug 'romainl/vim-cool'
 " Plug 'tpope/vim-sleuth'  " autodetect indent
 Plug 'tpope/vim-eunuch'  " Helpers for Move, Delete etc operations
 Plug 'tpope/vim-dadbod', {'for': 'sql'}
@@ -46,6 +48,8 @@ Plug 'keith/swift.vim'
 
 Plug 'kamykn/spelunker.vim'
 
+Plug 'JuliaEditorSupport/julia-vim'
+
 if $NEOVIM_JS == '1'
     Plug 'othree/yajs.vim', {'for': 'javascript'}
     Plug 'HerringtonDarkholme/yats.vim', {'for': 'typescript'}
@@ -61,7 +65,6 @@ endif
 if $NEOVIM_SCI == '1'
     Plug 'lervag/vimtex', {'for': 'tex'}
     Plug 'jalvesaq/Nvim-R', {'for' : 'r'}
-    Plug 'JuliaEditorSupport/julia-vim'
 endif
 call plug#end()
 
@@ -186,6 +189,12 @@ let cmdline_map_send_block     = '<LocalLeader>b'
 let cmdline_map_quit           = '<LocalLeader>rq'
 let cmdline_vsplit             = 1
 let cmdline_term_width         = 80
+let cmdline_in_buffer          = 0
+
+" julia-vim settings
+let g:latex_to_unicode_tab         = 0
+let g:latex_to_unicode_suggestions = 0
+let g:latex_to_unicode_auto        = 1
 
 "" Snippet configuration
 " c-j c-k for moving in snippet
