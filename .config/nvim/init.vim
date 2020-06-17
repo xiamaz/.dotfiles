@@ -98,7 +98,7 @@ end
 
 "" Plugin Configuration
 let g:coc_global_extensions = [
-	    \ 'coc-python',
+	    \ 'coc-python', 'coc-julia',
 	    \ 'coc-tsserver', 'coc-html', 'coc-css',
 	    \ 'coc-vimlsp', 'coc-vimtex',
 	    \ 'coc-go',
@@ -352,10 +352,13 @@ nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
 
 nnoremap <Leader>i  mzgg=G`z :retab<CR>
-nnoremap <leader>b :Clap buffers<CR>
-nnoremap <leader><space> :Clap files<CR>
-nnoremap <leader>g :Clap grep<CR>
+autocmd FileType clap_input inoremap <silent> <buffer> <Esc> <Esc>:call clap#handler#exit()<CR>
+nnoremap <silent> <space>b :Clap buffers<CR>
+nnoremap <silent> <space>f :Clap files<CR>
+nnoremap <silent> <space>g :Clap grep<CR>
 nnoremap <leader><c-p> :CocCommand python.setInterpreter<CR>
+nnoremap <silent> <space>d :CocCommand explorer<CR>
+
 
 if $CONDA_PREFIX == ""
   if $CONDA_PYTHON_EXE == ""
