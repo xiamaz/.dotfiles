@@ -216,3 +216,5 @@ bindkey '^[[B' history-substring-search-down
 
 alias cgit='git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias ae='autoenv'
+alias julia="julia --startup-file=no"
+alias jl="/usr/bin/env julia -J'$HOME/.julia/lib/sys_calc.so'"
