@@ -15,7 +15,8 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'zef/vim-cycle'
-Plug 'romainl/vim-cool'
+Plug 'romainl/vim-cool'  " disable search highlight after usage
+Plug 'markonm/traces.vim'  " highlight ex commands
 " Plug 'tpope/vim-sleuth'  " autodetect indent
 Plug 'tpope/vim-eunuch'  " Helpers for Move, Delete etc operations
 Plug 'tpope/vim-dadbod', {'for': 'sql'}
