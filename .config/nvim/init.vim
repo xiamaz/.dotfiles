@@ -16,17 +16,13 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'zef/vim-cycle'
 Plug 'romainl/vim-cool'  " disable search highlight after usage
-Plug 'markonm/traces.vim'  " highlight ex commands
-" Plug 'tpope/vim-sleuth'  " autodetect indent
 Plug 'tpope/vim-eunuch'  " Helpers for Move, Delete etc operations
 Plug 'tpope/vim-dadbod', {'for': 'sql'}
-" Plug 'junegunn/fzf'
-Plug 'junegunn/vim-peekaboo'
+Plug 'junegunn/vim-peekaboo'  " auto show registers on @ etc...
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 Plug 'junegunn/vim-easy-align'
 Plug 'majutsushi/tagbar'   " deps: universal-ctags
 Plug 'kshenoy/vim-signature'  " show marks in gutter
-Plug 'mbbill/undotree'  " menu with undo
 Plug 'itchyny/lightline.vim'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'Yggdroot/indentLine'  " add markers for indent
@@ -154,6 +150,7 @@ let g:lightline = {
 			\}
 " do not show the insert status, since we have lightline
 set noshowmode
+set inccommand=nosplit
 " Whitespace - Tabs line Spaces dotted
 let g:indentLine_char = '┆'
 let g:indentLine_setConceal = 0
