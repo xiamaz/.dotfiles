@@ -1,4 +1,4 @@
-cmd - return : /Users/max/Configurations/OSX/open-terminal.scpt
+# cmd - return : /Users/max/Configurations/OSX/open-terminal.scpt
 cmd + shift - return : osascript -e "tell application \"iTerm2\" to create window with default profile"
 
 cmd - h : yabai -m window --focus west
