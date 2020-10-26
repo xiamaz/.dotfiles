@@ -14,6 +14,7 @@ endfunction
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-abolish'
 Plug 'zef/vim-cycle'
 Plug 'romainl/vim-cool'  " disable search highlight after usage
 Plug 'tpope/vim-eunuch'  " Helpers for Move, Delete etc operations
@@ -29,6 +30,8 @@ Plug 'Yggdroot/indentLine'  " add markers for indent
 Plug 'chriskempson/base16-vim'
 Plug 'drmikehenry/vim-extline'  " CTRL-L to underline and overline lines
 Plug 'neovimhaskell/haskell-vim'
+Plug 'pechorin/any-jump.vim'  " jump to any definition with leader-j
+Plug 'brooth/far.vim'  " search replace quickly in multiple files
 " Code utils
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
