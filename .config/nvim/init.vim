@@ -37,8 +37,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'jalvesaq/vimcmdline', {'for': ['python', 'julia', 'sql', 'sh']}
 Plug 'ludovicchabant/vim-gutentags'
-
-Plug 'itchyny/vim-cursorword'
+Plug 'Valloric/MatchTagAlways'
 
 Plug 'Vimjas/vim-python-pep8-indent', {'for' : 'python'}
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
@@ -56,8 +55,6 @@ if $NEOVIM_JS == '1'
     Plug 'MaxMEllon/vim-jsx-pretty', {'for': ['javascript', 'typescript']}
     Plug 'Quramy/vim-js-pretty-template', {'for': ['javascript', 'typescript']}
     Plug 'mhartington/nvim-typescript', {'do': './install.sh', 'for': 'typescript'}
-    Plug 'iloginow/vim-stylus'
-    Plug 'Valloric/MatchTagAlways', {'for' : 'html'}
 endif
 if $NEOVIM_GO == '1'
     Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries', 'for': 'go'}
@@ -101,7 +98,6 @@ let g:coc_global_extensions = [
 	    \ 'coc-python', 'coc-julia',
 	    \ 'coc-tsserver', 'coc-html', 'coc-css',
 	    \ 'coc-vimlsp', 'coc-vimtex',
-	    \ 'coc-go',
 	    \ 'coc-texlab',
 	    \ 'coc-r-lsp',
 	    \ 'coc-docker', 'coc-sh',
@@ -131,6 +127,15 @@ function WordCountStatus()
 endfunction
 
 autocmd FileType text,markdown let b:wordcount_enabled = 1
+
+" MatchParenAlways
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'jinja' : 1,
+    \ 'vue': 1,
+    \}
 
 " Lightline
 let g:lightline = {
@@ -356,7 +361,7 @@ nnoremap <Leader>i  mzgg=G`z :retab<CR>
 autocmd FileType clap_input inoremap <silent> <buffer> <Esc> <Esc>:call clap#handler#exit()<CR>
 nnoremap <silent> <space>b :Clap buffers<CR>
 nnoremap <silent> <space>f :Clap files<CR>
-nnoremap <silent> <space>g :Clap grep<CR>
+nnoremap <silent> <space>g :Clap grep2<CR>
 nnoremap <leader><c-p> :CocCommand python.setInterpreter<CR>
 nnoremap <silent> <space>d :CocCommand explorer<CR>
 
