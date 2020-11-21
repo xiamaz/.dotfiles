@@ -149,25 +149,50 @@ elif [ -d /usr/local/miniconda3 ]; then
 	_conda_aliases
 fi
 
-source "${HOME}/.zgen/zgen.zsh"
-if ! zgen saved; then
-	zgen load zsh-users/zsh-syntax-highlighting
-	zgen load zsh-users/zsh-history-substring-search
-	zgen load zsh-users/zsh-autosuggestions
+source ~/.zinit/bin/zinit.zsh
 
-	zgen load zsh-users/zsh-completions src
+zinit for \
+    light-mode  zsh-users/zsh-autosuggestions \
+    light-mode  zsh-users/zsh-history-substring-search \
+    OMZP::sudo \
+    OMZP::fzf \
+    light-mode pick"async.zsh" src"pure.zsh" \
+                sindresorhus/pure \
+    pick'autoenv.zsh' nocompletions \
+        Tarrasch/zsh-autoenv \
+    as"completion" \
+      OMZ::plugins/docker/_docker
 
-	zgen load robbyrussell/oh-my-zsh
-	zgen load robbyrussell/oh-my-zsh plugins/kubectl
+zinit wait lucid for \
+        OMZ::lib/git.zsh \
+    atload"unalias grv" \
+        OMZP::git
 
-	zgen load Tarrasch/zsh-autoenv
+zinit wait lucid atload"zicompinit; zicdreplay" blockf for \
+    zsh-users/zsh-completions
 
-	# theme
-	zgen load mafredri/zsh-async
-	zgen load sindresorhus/pure
-
-	zgen save
-fi
+# source "${HOME}/.zgen/zgen.zsh"
+# if ! zgen saved; then
+# 	zgen load zsh-users/zsh-syntax-highlighting
+# 	zgen load zsh-users/zsh-history-substring-search
+# 	zgen load zsh-users/zsh-autosuggestions
+# 
+# 	zgen oh-my-zsh
+# 	zgen oh-my-zsh plugins/git
+# 	zgen oh-my-zsh plugins/sudo
+# 	zgen oh-my-zsh plugins/docker
+# 	zgen oh-my-zsh plugins/docker-compose
+# 
+# 	zgen load zsh-users/zsh-completions src
+# 
+# 	zgen load Tarrasch/zsh-autoenv
+# 
+# 	# theme
+# 	zgen load mafredri/zsh-async
+# 	zgen load sindresorhus/pure
+# 
+# 	zgen save
+# fi
 
 # set some history options
 setopt append_history
@@ -218,4 +243,3 @@ alias cgit='git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
 alias ae='autoenv'
 alias julia="julia --startup-file=no"
 alias jl="/usr/bin/env julia -J'$HOME/.julia/lib/sys_calc.so'"
-alias gp='git push -u origin HEAD'  # push to same name on remote

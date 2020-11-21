@@ -16,7 +16,9 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-abolish'
 Plug 'zef/vim-cycle'
+Plug 'embear/vim-localvimrc'
 Plug 'romainl/vim-cool'  " disable search highlight after usage
+Plug 'liuchengxu/vim-which-key'
 Plug 'tpope/vim-eunuch'  " Helpers for Move, Delete etc operations
 Plug 'tpope/vim-dadbod', {'for': 'sql'}
 Plug 'junegunn/vim-peekaboo'  " auto show registers on @ etc...
@@ -68,8 +70,9 @@ call plug#end()
 "" Basic Settings
 syntax on
 set noshowcmd noruler  " improve scrolling
-let mapleader = ";"
-let maplocalleader = ";"
+let mapleader = "\<space>"
+let maplocalleader = "\<space>"
+set timeoutlen=500  " shorter leader timeout
 set autoindent
 " smart tabs configuration - use tabs for indent and spaces for align
 set noexpandtab copyindent preserveindent softtabstop=0 shiftwidth=4 tabstop=4
@@ -327,21 +330,21 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 "" Custom keybindings
 " setup arrowkeys for visual scroll
@@ -357,13 +360,18 @@ inoremap <buffer> <silent> <End>  <C-o>g<End>
 nnoremap <esc> :noh<return><esc>
 nnoremap <esc>^[ <esc>^[
 
+nnoremap <silent> <leader>ce :vsp $MYVIMRC<CR>
+nnoremap <silent> <leader>cr :source $MYVIMRC<CR>
+
+nnoremap <silent> <leader> :WhichKey '<space>'<CR>
+
 nnoremap <Leader>i  mzgg=G`z :retab<CR>
 autocmd FileType clap_input inoremap <silent> <buffer> <Esc> <Esc>:call clap#handler#exit()<CR>
-nnoremap <silent> <space>b :Clap buffers<CR>
-nnoremap <silent> <space>f :Clap files<CR>
-nnoremap <silent> <space>g :Clap grep2<CR>
+nnoremap <silent> <leader>b :Clap buffers<CR>
+nnoremap <silent> <leader>f :Clap files<CR>
+nnoremap <silent> <leader>g :Clap grep2<CR>
 nnoremap <leader><c-p> :CocCommand python.setInterpreter<CR>
-nnoremap <silent> <space>d :CocCommand explorer<CR>
+nnoremap <silent> <leader>d :CocCommand explorer<CR>
 
 
 if $CONDA_PREFIX == ""

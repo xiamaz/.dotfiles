@@ -6,6 +6,7 @@ export YABAI_CERT='Max Zhao'
 brew services stop koekeishiya/formulae/yabai
 
 # reinstall yabai
+brew unpin yabai
 brew reinstall koekeishiya/formulae/yabai
 codesign -fs "${YABAI_CERT:-yabai-cert}" "$(brew --prefix yabai)/bin/yabai"
 
@@ -15,6 +16,8 @@ sudo yabai --install-sa
 
 # start yabai
 brew services start koekeishiya/formulae/yabai
+
+brew pin yabai
 
 # load the scripting addition
 killall Dock

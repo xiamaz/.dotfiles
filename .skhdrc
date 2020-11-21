@@ -6,11 +6,6 @@ cmd - j : yabai -m window --focus south
 cmd - k : yabai -m window --focus north
 cmd - l : yabai -m window --focus east
 
-cmd + shift - h : yabai -m window --insert west
-cmd + shift - j : yabai -m window --insert south
-cmd + shift - k : yabai -m window --insert north
-cmd + shift - l : yabai -m window --insert east
-
 :: yabai
 cmd - a; yabai
 
@@ -24,6 +19,11 @@ yabai < cmd - h : yabai -m window --warp west; skhd -k "return"
 yabai < cmd - j : yabai -m window --warp south; skhd -k "return"
 yabai < cmd - k : yabai -m window --warp north; skhd -k "return"
 yabai < cmd - l : yabai -m window --warp east; skhd -k "return"
+
+yabai < cmd + ctrl - h : yabai -m window --insert west
+yabai < cmd + ctrl - j : yabai -m window --insert south
+yabai < cmd + ctrl - k : yabai -m window --insert north
+yabai < cmd + ctrl - l : yabai -m window --insert east
 
 yabai < shift + cmd - h : yabai -m window --swap west; skhd -k "return"
 yabai < shift + cmd - j : yabai -m window --swap south; skhd -k "return"
