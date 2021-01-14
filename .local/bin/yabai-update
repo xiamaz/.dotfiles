@@ -7,7 +7,8 @@ brew services stop koekeishiya/formulae/yabai
 
 # reinstall yabai
 brew unpin yabai
-brew reinstall koekeishiya/formulae/yabai
+brew uninstall koekeishiya/formulae/yabai
+brew install koekeishiya/formulae/yabai --HEAD
 codesign -fs "${YABAI_CERT:-yabai-cert}" "$(brew --prefix yabai)/bin/yabai"
 
 # reinstall the scripting addition

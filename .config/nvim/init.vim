@@ -3,7 +3,6 @@ if ! empty($NEOVIM_PYTHON_PATH)
     let g:python_host_prog = $NEOVIM_PYTHON_PATH
 end
 let g:loaded_ruby_provider = 0
-" let g:loaded_node_provider = 1
 
 call plug#begin()
 "" Neovim configuration
@@ -20,7 +19,6 @@ Plug 'embear/vim-localvimrc'
 Plug 'romainl/vim-cool'  " disable search highlight after usage
 Plug 'liuchengxu/vim-which-key'
 Plug 'tpope/vim-eunuch'  " Helpers for Move, Delete etc operations
-Plug 'tpope/vim-dadbod', {'for': 'sql'}
 Plug 'junegunn/vim-peekaboo'  " auto show registers on @ etc...
 Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 Plug 'junegunn/vim-easy-align'
@@ -31,7 +29,6 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'Yggdroot/indentLine'  " add markers for indent
 Plug 'chriskempson/base16-vim'
 Plug 'drmikehenry/vim-extline'  " CTRL-L to underline and overline lines
-Plug 'neovimhaskell/haskell-vim'
 Plug 'pechorin/any-jump.vim'  " jump to any definition with leader-j
 Plug 'brooth/far.vim'  " search replace quickly in multiple files
 " Code utils
@@ -44,10 +41,9 @@ Plug 'Valloric/MatchTagAlways'
 Plug 'Vimjas/vim-python-pep8-indent', {'for' : 'python'}
 Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
 Plug 'ekalinin/Dockerfile.vim'
-Plug 'lifepillar/pgsql.vim'
 Plug 'keith/swift.vim'
 
-Plug 'kamykn/spelunker.vim'
+" Plug 'kamykn/spelunker.vim'
 
 Plug 'JuliaEditorSupport/julia-vim'
 
@@ -58,9 +54,6 @@ if $NEOVIM_JS == '1'
     Plug 'Quramy/vim-js-pretty-template', {'for': ['javascript', 'typescript']}
     Plug 'mhartington/nvim-typescript', {'do': './install.sh', 'for': 'typescript'}
 endif
-if $NEOVIM_GO == '1'
-    Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries', 'for': 'go'}
-endif
 if $NEOVIM_SCI == '1'
     Plug 'lervag/vimtex', {'for': 'tex'}
     Plug 'jalvesaq/Nvim-R', {'for' : 'r'}
@@ -69,7 +62,7 @@ call plug#end()
 
 "" Basic Settings
 syntax on
-set noshowcmd noruler  " improve scrolling
+" set noshowcmd noruler  " improve scrolling
 let mapleader = "\<space>"
 let maplocalleader = "\<space>"
 set timeoutlen=500  " shorter leader timeout
@@ -97,18 +90,6 @@ else
 end
 
 "" Plugin Configuration
-let g:coc_global_extensions = [
-	    \ 'coc-python', 'coc-julia',
-	    \ 'coc-tsserver', 'coc-html', 'coc-css',
-	    \ 'coc-vimlsp', 'coc-vimtex',
-	    \ 'coc-texlab',
-	    \ 'coc-r-lsp',
-	    \ 'coc-docker', 'coc-sh',
-	    \ 'coc-ultisnips',
-	    \]
-let g:undotree_WindowLayout = 3
-
-let g:haskell_indent_disable = 0
 
 function WordCount()
   let cur_mode = mode()
@@ -192,9 +173,9 @@ let g:gutentags_file_list_command = {
 let cmdline_app                = {'python': 'ipython3', 'julia': 'julia', 'sh': 'bash'}
 let cmdline_map_start          = '<LocalLeader>rf'
 let cmdline_map_send           = '<LocalLeader>l'
-let cmdline_map_source_fun     = '<LocalLeader>f'
-let cmdline_map_send_paragraph = '<LocalLeader>p'
-let cmdline_map_send_block     = '<LocalLeader>b'
+let cmdline_map_source_fun     = '<LocalLeader>rd'
+let cmdline_map_send_paragraph = '<LocalLeader>rp'
+let cmdline_map_send_block     = '<LocalLeader>rb'
 let cmdline_map_quit           = '<LocalLeader>rq'
 let cmdline_vsplit             = 1
 let cmdline_term_width         = 80
@@ -212,8 +193,6 @@ let g:UltiSnipsJumpForwardTrigger = '<TAB>'
 let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
 let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsEditSplit                = "vertical"
-let g:coc_snippet_next                  = '<Tab>'
-let g:coc_snippet_prev                  = '<S-Tab>'
 
 " latex settings
 let g:vimtex_view_method       = "skim"
@@ -225,15 +204,15 @@ let g:tex_conceal              = ""
 set spelllang=en_us,de_de
 set nospell  " since we already have spelunker
 
-let g:spelunker_disable_auto_group = 1
-augroup spelunker
-  autocmd!
-  " Setting for g:spelunker_check_type = 1:
-  autocmd BufWinEnter,BufWritePost *.md,*.tex,*.latex,*.txt call spelunker#check()
-
-  " Setting for g:spelunker_check_type = 2:
-  autocmd CursorHold *.md,*.tex,*.latex,*.txt call spelunker#check_displayed_words()
-augroup END
+" let g:spelunker_disable_auto_group = 1
+" augroup spelunker
+"   autocmd!
+"   " Setting for g:spelunker_check_type = 1:
+"   autocmd BufWinEnter,BufWritePost *.md,*.tex,*.latex,*.txt call spelunker#check()
+" 
+"   " Setting for g:spelunker_check_type = 2:
+"   autocmd CursorHold *.md,*.tex,*.latex,*.txt call spelunker#check_displayed_words()
+" augroup END
 
 " Clipboard settings
 set clipboard=unnamedplus
@@ -251,6 +230,18 @@ nnoremap <leader><C-w> :ToggleWhitespace<CR>
 nnoremap <leader><C-t> :TagbarToggle<CR>
 
 "" COC settings
+" let g:coc_node_args = ['--nolazy', '--inspect-brk=6045']
+let g:coc_global_extensions = [
+	    \ 'coc-python',
+	    \ 'coc-tsserver', 'coc-html', 'coc-css',
+	    \ 'coc-vimlsp', 'coc-vimtex',
+	    \ 'coc-texlab',
+	    \ 'coc-r-lsp',
+	    \ 'coc-docker', 'coc-sh',
+	    \ 'coc-ultisnips',
+	    \]
+let g:coc_snippet_next                  = '<Tab>'
+let g:coc_snippet_prev                  = '<S-Tab>'
 set nobackup nowritebackup hidden
 set cmdheight=1
 set updatetime=300 shortmess+=c signcolumn=yes
@@ -289,9 +280,9 @@ function! s:show_documentation()
 endfunction
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
-nmap <leader>rn <Plug>(coc-rename)
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>rn <Plug>(coc-rename)
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -327,24 +318,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Using CocList
-" Show all diagnostics
-" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions
-" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" Show commands
-" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document
-" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols
-" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list
-" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 "" Custom keybindings
 " setup arrowkeys for visual scroll
@@ -384,3 +357,5 @@ else
   let s:current_python_path=$CONDA_PREFIX.'/bin/python'
 endif
 call coc#config('python', {'pythonPath': s:current_python_path})
+
+set runtimepath^=/Users/max/Code/coc-julia
